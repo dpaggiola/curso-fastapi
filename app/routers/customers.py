@@ -51,3 +51,6 @@ async def delete_customer(customer_id: int, session: SessionDep):
 @router.get("/customers", response_model=list[Customer], tags=['customers'])
 async def list_customers(session: SessionDep):
   return session.exec(select(Customer)).all()
+
+@router.post("/customers/{customer_id}/plans/{plan_id}", status_code=status.HTTP_201_CREATED, tags=['customers'])
+async def subscribe_customer_to_plan(customer_id: int, plan_id: int, session: SessionDep):
